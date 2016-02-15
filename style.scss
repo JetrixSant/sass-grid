@@ -1,0 +1,50 @@
+$breakpoints: (
+  "xs": "0px",
+  "sm": "480px",
+  "md": "768px",
+  "lg": "980px"
+);
+
+[class*='col-'] {
+  box-sizing: border-box;
+  flex-basis: 100%;
+  min-height: 1px; 
+  margin-bottom: 1rem;
+  padding: .5rem;
+  .content {    
+    background-color: #4B77BE;
+    padding: .5rem;    
+    border-radius: 2px;  
+    color: #F5F5F5;
+    text-align: center;
+  }
+}
+
+.flex-container {
+  display: flex; 
+  &.wrap {
+    flex-wrap: wrap;
+    @each $name,$break in $breakpoints {
+      [class*="col-#{$name}"] {
+        margin-bottom: 0;
+      }
+      @media screen and (min-width: $break) {
+        [class*="col-#{$name}"] {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@each $name,$break in $breakpoints {
+  @media screen and (min-width: $break) {
+    @for $i from 1 through 12 {
+      $width: #{100/12 * $i + "%"};
+      .col-#{$name + "-" +$i} {
+         flex-basis: $width;
+         margin-bottom: 0;
+       }
+     }
+   }
+}
