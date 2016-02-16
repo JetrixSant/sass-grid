@@ -1,0 +1,5 @@
+@mixin common-column-style() {
+  box-sizing: border-box;
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}

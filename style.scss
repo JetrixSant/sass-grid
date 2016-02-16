@@ -1,50 +1,85 @@
+@import "mixin";
+
+// Variables
+
+// Numero de columnas
+$grid-columns: 12 !default;
+// Padding entre columnas
+$grid-gutter-width: 1rem !default;
+
+
 $breakpoints: (
-  "xs": "0px",
-  "sm": "480px",
-  "md": "768px",
-  "lg": "980px"
+  "phone"         : "320px",
+  "smallPhone"    : "480px",
+  "tablet"        : "768px",
+  "desktop"       : "1024px",
+  // "large-desktop" : "1400px"
 );
 
-[class*='col-'] {
-  box-sizing: border-box;
-  flex-basis: 100%;
-  min-height: 1px; 
-  margin-bottom: 1rem;
-  padding: .5rem;
-  .content {    
-    background-color: #4B77BE;
-    padding: .5rem;    
-    border-radius: 2px;  
-    color: #F5F5F5;
-    text-align: center;
-  }
+.container {
+  @include common-column-style;
 }
 
-.flex-container {
-  display: flex; 
-  &.wrap {
-    flex-wrap: wrap;
-    @each $name,$break in $breakpoints {
-      [class*="col-#{$name}"] {
-        margin-bottom: 0;
-      }
-      @media screen and (min-width: $break) {
-        [class*="col-#{$name}"] {
-          margin-bottom: 1rem;
-        }
-      }
-    }
-  }
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: - $grid-gutter-width;
+  margin-left: - $grid-gutter-width;
 }
+  .content {    
+    background-color: #4B77BE;
+    padding: .5rem;      
+    color: #F5F5F5;
+    text-align: center;
+    margin-bottom: $grid-gutter-width;
+  }
+
 
 @each $name,$break in $breakpoints {
   @media screen and (min-width: $break) {
-    @for $i from 1 through 12 {
-      $width: #{100/12 * $i + "%"};
-      .col-#{$name + "-" +$i} {
-         flex-basis: $width;
-         margin-bottom: 0;
+    @for $i from 1 through $grid-columns {
+      $width: #{100/$grid-columns * $i + "%"};
+      .#{$name + "-" +$i} {
+          flex-basis: $width;
+          @include common-column-style;
        }
      }
    }
+}
+
+
+.center {
+  justify-content: center;
+}
+
+.star {
+  justify-content: flex-start;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+
+.around {
+  justify-content: space-around;
+}
+
+.top {
+  align-items: flex-start;
+}
+
+.middle {
+  align-items: center;
+}
+
+.bottom {
+  align-items: flex-end;
 }
