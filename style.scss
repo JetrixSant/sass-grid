@@ -1,11 +1,14 @@
 @import "mixin";
-
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
 // Variables
 
 // Numero de columnas
 $grid-columns: 12 !default;
 // Padding entre columnas
 $grid-gutter-width: 1rem !default;
+$primary-color: #2c3e50;
+$button-background: $primary-color;
+$button-background-hover: scale-color($button-background, $lightness: -15%);
 
 
 $breakpoints: (
@@ -15,6 +18,14 @@ $breakpoints: (
   "desktop"       : "1024px",
   // "large-desktop" : "1400px"
 );
+
+body {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #2c3e50;
+  background-color: #ffffff;
+}
 
 .container {
   @include common-column-style;
@@ -82,4 +93,60 @@ $breakpoints: (
 
 .bottom {
   align-items: flex-end;
+}
+
+
+.button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+.button-default {
+  color: #ffffff;
+  background-color: #95a5a6;
+  border-color: #95a5a6;
+  &:hover {
+    color: #ffffff;
+    background-color: #798d8f;
+    border-color: #74898a;
+  }
+}
+
+.button-primary {
+  color: #ffffff;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: $button-background-hover;
+    border-color: #161f29;
+  }
+}
+
+.button-3d {
+  color: #fff;
+  background: #229FFD;
+  position: relative;
+  top: 0;
+  box-shadow: 0 4px 0 #0880d7, 0 5px 3px rgba(0, 0, 0, 0.3);
+  &:active {
+    top: 3px;
+    box-shadow: 0 1px 0 #0662a6, 0 2px 3px rgba(0, 0, 0, 0.2);
+  }
 }
